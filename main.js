@@ -56,6 +56,14 @@ const frenchDeck = [
 let userPoints = 0;
 let selectedFirstCard;
 let selectedSecondCard;
+let readyForNextGame = true;
+
+let textDisplay = document.querySelector(".text-display");
+let machineCard = document.querySelector(".machine-card");
+let userCard = document.querySelector(".user-card");
+let higherValueButton = document.querySelector(".higher-value-button");
+let lowerValueButton = document.querySelector(".lower-value-button");
+let startButton = document.querySelector(".start-button");
 
 const selectFirstRandomCard = () => {
   randomPosition = Math.floor(Math.random() * frenchDeck.length);
@@ -68,55 +76,40 @@ const selectSecondRandomCard = () => {
 };
 
 const playGame = () => {
-  selectFirstRandomCard();
-  alert(
-    `Bienvenido, la carta elegida aleatoriamente es ${selectedFirstCard.rank} de ${selectedFirstCard.suit}`
-  );
+  userCard.innerHTML = selectFirstRandomCard();
+  machineCard.innerHTML = selectedFirstCard.value + selectedFirstCard.suit;
+  textDisplay.innerHTML = `¿Crees que la siguiente carta será mayor o menor?`;
   selectSecondRandomCard();
-
-  const userGuessCheck = () => {
-    if (selectedSecondCard.value === selectedFirstCard.value) {
-      selectSecondRandomCard();
-    }
-
-    userGuess = prompt("¿Crees que la siguiente carta será mayor o menor?");
-
-    if (userGuess.toLowerCase() === "mayor") {
-      if (selectedFirstCard.value < selectedSecondCard.value) {
-        alert(
-          "Correcto! El valor de la nueva carta es mayor que el anterior, has conseguido 1 punto :)"
-        );
-        userPoints++;
-      } else {
-        alert(
-          `Se ha equivocado! La siguiente carta era ${selectedSecondCard.rank} de ${selectedSecondCard.suit} `
-        );
-      }
-    }
-
-    if (userGuess === "menor") {
-      if (selectedFirstCard.value > selectedSecondCard.value) {
-        alert(
-          "Correcto! El valor de la nueva carta es mayor que el anterior, has conseguido 1 punto :)"
-        );
-        userPoints++;
-      } else {
-        alert(
-          `Se ha equivocado! La siguiente carta era ${selectedSecondCard.rank} de ${selectedSecondCard.suit} `
-        );
-      }
-    }
-  };
-  userGuessCheck();
-
-  const rePlay = () => {
-    reply = confirm("¿Quiere volver a jugar?");
-    if (!reply) {
-      alert(`Has conseguido ${userPoints} puntos. \nHasta pronto!`);
-    } else {
-      playGame();
-    }
-  };
-  rePlay();
 };
-playGame();
+
+const higherGuessCheck = () => {
+  if (selectedSecondCard.value === selectedFirstCard.value) {
+    selectSecondRandomCard();
+  }
+  userCard.innerHTML = selectedSecondCard.value + selectedSecondCard.suit;
+  if (selectedFirstCard.value < selectedSecondCard.value) {
+    textDisplay.innerHTML = "Has acertado! Has conseguido 1 punto";
+    userPoints++;
+  } else if (selectedFirstCard.value > selectedSecondCard.value) {
+    textDisplay.innerHTML = "Has fallado!";
+    userPoints++;
+  }
+};
+
+const lowerGuessCheck = () => {
+  if (selectedSecondCard.value === selectedFirstCard.value) {
+    selectSecondRandomCard();
+  }
+  userCard.innerHTML = selectedSecondCard.value + selectedSecondCard.suit;
+  if (selectedFirstCard.value > selectedSecondCard.value) {
+    textDisplay.innerHTML = "Has acertado! Has conseguido 1 punto";
+    userPoints++;
+  } else if (selectedFirstCard.value < selectedSecondCard.value) {
+    textDisplay.innerHTML = "Has fallado!";
+    userPoints++;
+  }
+};
+
+higherValueButton.addEventListener("click", higherGuessCheck);
+lowerValueButton.addEventListener("click", lowerGuessCheck);
+startButton.addEventListener("click", playGame);

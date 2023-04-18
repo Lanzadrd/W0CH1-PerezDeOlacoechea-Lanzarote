@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .display {
@@ -13,7 +14,7 @@
 
 .card-display {
   width: 100%;
-  height: 75vh;
+  height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -36,7 +37,8 @@
   align-items: center;
 }
 
-.number {
+.machine-card,
+.user-card {
   display: flex;
   margin-top: 15vh;
   font-size: xxx-large;
@@ -44,10 +46,21 @@
   align-items: center;
 }
 
+.text-box {
+  height: 15vh;
+  background-color: antiquewhite;
+}
+
+.text-display {
+  text-align: center;
+  align-self: center;
+  font-size: 60px;
+}
+
 .button {
   font-family: Teko;
   font-weight: 100;
-  font-size: 15px;
+  font-size: 70px;
   color: #fff;
   background-color: #0066cc;
   padding: 10px 30px;
@@ -62,6 +75,7 @@
   cursor: pointer;
   width: 13vh;
   height: 40vw;
+  justify-content: center;
 }
 
 .button:hover {
