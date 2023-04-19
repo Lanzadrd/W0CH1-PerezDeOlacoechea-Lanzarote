@@ -1,3 +1,7 @@
+let userPoints = 0;
+let selectedFirstCard;
+let selectedSecondCard;
+let readyForNextGame = true;
 const frenchDeck = [
   { rank: "Ace", suit: "♠️", value: 13 },
   { rank: "2", suit: "♠️", value: 1 },
@@ -53,11 +57,6 @@ const frenchDeck = [
   { rank: "King", suit: "♣️", value: 2 },
 ];
 
-let userPoints = 0;
-let selectedFirstCard;
-let selectedSecondCard;
-let readyForNextGame = true;
-
 let textDisplay = document.querySelector(".text-display");
 let machineCard = document.querySelector(".machine-card");
 let userCard = document.querySelector(".user-card");
@@ -76,7 +75,8 @@ const selectSecondRandomCard = () => {
 };
 
 const playGame = () => {
-  userCard.innerHTML = selectFirstRandomCard();
+  selectFirstRandomCard();
+  userCard.innerHTML = "?";
   machineCard.innerHTML = selectedFirstCard.value + selectedFirstCard.suit;
   textDisplay.innerHTML = `¿Crees que la siguiente carta será mayor o menor?`;
   selectSecondRandomCard();
@@ -88,10 +88,11 @@ const higherGuessCheck = () => {
   }
   userCard.innerHTML = selectedSecondCard.value + selectedSecondCard.suit;
   if (selectedFirstCard.value < selectedSecondCard.value) {
-    textDisplay.innerHTML = "Has acertado! Has conseguido 1 punto";
+    textDisplay.innerHTML =
+      "¡Correcto! <br> Has conseguido 1 punto <br> Pulsa ♺ para volver a jugar";
     userPoints++;
   } else if (selectedFirstCard.value > selectedSecondCard.value) {
-    textDisplay.innerHTML = "Has fallado!";
+    textDisplay.innerHTML = "¡Has fallado! <br> Pulsa ♺ para volver a jugar";
     userPoints++;
   }
 };
@@ -102,11 +103,11 @@ const lowerGuessCheck = () => {
   }
   userCard.innerHTML = selectedSecondCard.value + selectedSecondCard.suit;
   if (selectedFirstCard.value > selectedSecondCard.value) {
-    textDisplay.innerHTML = "Has acertado! Has conseguido 1 punto";
+    textDisplay.innerHTML =
+      "¡Correcto! <br> Has conseguido 1 punto <br> Pulsa ♺ para volver a jugar";
     userPoints++;
   } else if (selectedFirstCard.value < selectedSecondCard.value) {
-    textDisplay.innerHTML = "Has fallado!";
-    userPoints++;
+    textDisplay.innerHTML = "¡Has fallado! <br> Pulsa ♺ para volver a jugar";
   }
 };
 
