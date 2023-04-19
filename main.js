@@ -86,14 +86,15 @@ const higherGuessCheck = () => {
   if (selectedSecondCard.value === selectedFirstCard.value) {
     selectSecondRandomCard();
   }
+
   userCard.innerHTML = selectedSecondCard.value + selectedSecondCard.suit;
+
   if (selectedFirstCard.value < selectedSecondCard.value) {
     textDisplay.innerHTML =
       "¡Correcto! <br> Has conseguido 1 punto <br> Pulsa ♺ para volver a jugar";
     userPoints++;
   } else if (selectedFirstCard.value > selectedSecondCard.value) {
     textDisplay.innerHTML = "¡Has fallado! <br> Pulsa ♺ para volver a jugar";
-    userPoints++;
   }
 };
 
@@ -101,7 +102,9 @@ const lowerGuessCheck = () => {
   if (selectedSecondCard.value === selectedFirstCard.value) {
     selectSecondRandomCard();
   }
+
   userCard.innerHTML = selectedSecondCard.value + selectedSecondCard.suit;
+
   if (selectedFirstCard.value > selectedSecondCard.value) {
     textDisplay.innerHTML =
       "¡Correcto! <br> Has conseguido 1 punto <br> Pulsa ♺ para volver a jugar";
